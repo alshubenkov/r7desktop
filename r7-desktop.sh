@@ -37,7 +37,7 @@ case "$os_type" in
     echo "и запустите скрипт снова"
     exit 1
   fi
- 
+ # 
  echo "Запуск обновления пакетов"
  apt-get update -y
  echo "Установка зависимостей"
