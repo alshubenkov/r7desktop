@@ -24,7 +24,21 @@ case "$os_type" in
  ;;
 
  "altlinux" )
- echo "ОПределена ОС семейства АЛЬТ Линукс"
+ echo "Определена ОС семейства АЛЬТ Линукс"
+ echo "введите пароль ROOT ниже"
+ su -
+ echo "Запуск обновления пакетов"
+ apt-get update -y
+ echo "Установка зависимостей"
+ apt-get install -y wget fonts-ttf-dejavu fonts-ttf-google-crosextra-carlito fonts-ttf-liberation glibc gst-libav gst-plugins-ugly1.0 libX11 libXScrnSaver libcairo libgcc1 libgtk+2 libgtkglext
+ echo "Получение скрипта из репозитория Р7"
+ wget https://download.r7-office.ru/altlinux/r7-office.rpm
+ echo "Установка r7-office desktop"
+ rpm -i r7-office.rpm
+ echo "Выход из учетной записи ROOT"
+ exit
+ echo "Запуск Р7 Офис Десктоп, не забудьте установить лицензию"
+ r7-office
  ;;
 
 esac
