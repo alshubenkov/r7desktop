@@ -21,7 +21,7 @@ case "$os_type" in
  sudo apt-get update -y || err "ошибка apt-get update -y"
  echo "Установка зависимостей"
  sudo apt-get install -y fonts-crosextra-carlito fonts-dejavu fonts-liberation fonts-opensymbol \
- curl gstreamer1.0-libav gstreamer1.0-plugins-ugly libasound2 libc6 libcairo2 libgcc1 libgconf-2-4 
+ curl gstreamer1.0-libav gstreamer1.0-plugins-ugly libasound2 libc6 libcairo2 libgcc1 libgconf-2-4 \
  libgtk-3-0 libstdc++6 libx11-6 libxss1 x11-common xdg-utils || err "ошибка установки зависимостей"
  echo "Скачивание дистрибутива"
  wget -N https://download.r7-office.ru/astra/r7-office.deb || err "ошибка загрузки https://download.r7-office.ru/astra/r7-office.deb"
