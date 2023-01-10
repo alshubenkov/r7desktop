@@ -1,6 +1,7 @@
 #!/bin/bash
 
-exec 2>&1 | tee file.log
+exec > >(tee file.log) 2>&1
+
 err() { echo -e "* Error: $1"; exit 1; }
 
 echo "Скрипт автоматической установки R7-Office Desktop"
@@ -17,13 +18,15 @@ case "$os_type" in
  "astra" )
  echo "ОПределена ОС семейства Астра Линукс"
  echo "Запуск обновления системы"
- sudo apt-get update -y
+ sudo apt-get update -y || err "ошибка apt-get update -y"
  echo "Установка зависимостей"
- sudo apt-get install -y fonts-crosextra-carlito fonts-dejavu fonts-liberation fonts-opensymbol curl gstreamer1.0-libav gstr$
+ sudo apt-get install -y fonts-crosextra-carlito fonts-dejavu fonts-liberation fonts-opensymbol \
+ curl gstreamer1.0-libav gstreamer1.0-plugins-ugly libasound2 libc6 libcairo2 libgcc1 libgconf-2-4 
+ libgtk-3-0 libstdc++6 libx11-6 libxss1 x11-common xdg-utils || err "ошибка установки зависимостей"
  echo "Скачивание дистрибутива"
- wget -N https://download.r7-office.ru/astra/r7-office.deb
+ wget -N https://download.r7-office.ru/astra/r7-office.deb || err "ошибка загрузки https://download.r7-office.ru/astra/r7-office.deb"
  echo "Установка r7 desktop"
- sudo dpkg -i  r7-office.deb
+ sudo dpkg -i  r7-office.deb || err "ошибка установки r7-office.deb"
  ;;
 ######### Конец блока кода для Астра
 
@@ -33,13 +36,15 @@ case "$os_type" in
  #Установка Р7-Десктоп на РЕДОС
  # Обновление системы
  echo "Запуск обновления системы"
- sudo yum update -y
+ sudo yum update -y || err "ошибка yum update -y"
  echo "Установка зависимостей"
- sudo yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64//gstreamer1-libav-1.0.6-1.el7.nux.x86_64.rpm
+ sudo yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64//gstreamer1-libav-1.0.6-1.el7.nux.x86_64.rpm || err "ошибка установки зависимостей"
  echo "Скачивание дистрибутива"
- wget  -N https://download.r7-office.ru/centos/r7-office.rpm
+ wget  -N https://download.r7-office.ru/centos/r7-office.rpm || err "ошибка загрузки https://download.r7-office.ru/centos/r7-office.rpm"
  echo "Установка r7 desktop"
- sudo yum install -y r7-office.rpm
+ sudo yum install -y r7-office.rpm || err "ошибка установки r7-office.rpm"
+ echo "Установка завершена успешно"
+ echo "Запустите Р7 Офис Десктоп, не забудьте установить лицензию"
  ;;
 ######### Конец блока кода для РЕДОС
 
@@ -47,9 +52,11 @@ case "$os_type" in
  "rosa" )
  echo "ОПределена ОС семейства РОСА Линукс"
  echo "Запуск обновления системы"
- sudo urpmi --auto-update --auto
+ sudo urpmi --auto-update --auto || err "ошибка urpmi --auto-update --auto"
  echo "Установка r7 desktop"
- sudo urpmi --auto https://download.r7-office.ru/rosa/r7-office.rpm
+ sudo urpmi --auto https://download.r7-office.ru/rosa/r7-office.rpm || err "ошибка установки r7-office.rpm"
+ echo "Установка завершена успешно"
+ echo "Запустите Р7 Офис Десктоп, не забудьте установить лицензию"
  ;;
 ######### Конец блока кода для РОСА
 
