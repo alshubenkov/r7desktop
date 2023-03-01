@@ -21,8 +21,8 @@ os_type=`cat /etc/*-release | grep ^ID= | tr -d '"' | awk '{print substr ($ 0, 4
 echo "Определена ОС Линукс семейства:"
 echo "$os_type"
 
-echo "Проверка связи с сервером download.r7-office.ru"
-ping -c 5 download.r7-office.ru || err "Нет связи с сервером загрузок Р7, проверьте настройки соединения"
+#echo "Проверка связи с сервером download.r7-office.ru"
+#ping -c 5 download.r7-office.ru || err "Нет связи с сервером загрузок Р7, проверьте настройки соединения"
 
 
 case "$os_type" in
